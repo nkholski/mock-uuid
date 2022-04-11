@@ -27,17 +27,9 @@ describe("Mock UUID tests", () => {
 
   test("MockUUID.get throws expected errors", () => {
     expect(() => mockUuid.get(1, 1, 1)).toThrow(Error);
-    try {
-      mockUuid.get(1, 6, 1);
-    } catch (e) {
-      expect(e.message).toContain("Version");
-    }
+    expect(() => mockUuid.get(1, 6, 1)).toThrow(/Version/);
     expect(() => mockUuid.get(1, 1, 2, -1)).toThrow(Error);
-    try {
-      mockUuid.get(1, 1, 2, 5);
-    } catch (e) {
-      expect(e.message).toContain("Variant");
-    }
+    expect(() => mockUuid.get(1, 1, 2, 5)).toThrow(/Variant/);
   });
 
   test("MockUUID.getGenerator render valid uuids", () => {
